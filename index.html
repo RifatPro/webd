@@ -1,43 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-</head>
+    <title>Form Layout</title>
+    <style>
+.box-container-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap:5px;
+}
 
-<body>
-    <section style="display: flex;flex-direction: column;
-  align-items: center;justify-content: center;gap: 5px;">
+/* Top box */
+.box-container-left-top {
+  width: 100%; /* Fill available width */
+  height: 50%; /* Take half the height of the parent container */
+  padding: 20px;
+  border: 5px solid red;
+  box-sizing: border-box; /* Include padding in width and height */
+}
+
+/* Bottom box */
+.box-container-left-bottom {
+  width: 100%;
+  height: 50%;
+  padding: 20px;
+  border: 5px solid yellow;
+  box-sizing: border-box;
+}
+
+/* Right container */
+.box-container-right {
+  width: 700px;
+  height: 1600px;
+  border: 5px solid green;
+}
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      .btn-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: black;
+      }
+
+      .box-container {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .box-container-left {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .box-container-left-top {
+        width: 700px;
+        height: 800px;
+        border: 5px solid red;
+        padding: 20px;
+      }
+
+      /* Form styling */
+      .form-example div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .form-example label {
+        width: 150px; /* Fixed label width */
+        font-weight: bold;
+      }
+
+      .form-example input {
+        flex: 1; /* Make input take remaining space */
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      /* Background color input */
+      .color-picker {
+        /* display: flex; */
+        align-items: start;
+        gap: 5px;
+      }
+      .color-picker input[type="color"] {
+        width: 40px; /* Button-sized */
+        height: 30px;
+        border: none;
+        padding: 0 450px 0 0;
+        cursor: pointer;
+        background-color: transparent; /* Removes extra background */
+      }
+
+      /* Gender section */
+      .gender {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .gender input {
+        margin-left: 5px;
+      }
+
+      /* Checkboxes side by side */
+      .checkbox-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+
+      /* Submit button */
+      .box-container-left-top button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+      }
+
+      .box-container-left-top button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+
+    <main>
+      <section class="container">
         <div>
-            <button style="
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: black;
-          "></button>
+          <button class="btn-circle"></button>
         </div>
 
         <div>
-            <P>Flexbox</P>
+          <p>Flexbox</p>
         </div>
 
+        <div class="box-container">
+          <!-- Left Column (Contains Two Boxes) -->
+          <div class="box-container-left">
+            <div class="box-container-left-top">
+              <form action="" method="get" class="form-example">
+                <div>
+                  <label for="name">Fullname:</label>
+                  <input type="text" name="name" id="name" required />
+                </div>
 
-        <div style="display: flex; align-items: stretch;">
-            <!-- Left Column (Contains Two Boxes) -->
-            <div style="display: flex; flex-direction: column;">
-                <div style="width: 50px; height: 50px; border: 5px solid red;">Left Top</div>
-                <div style="width: 50px; height: 50px; border: 5px solid yellow;">Left Bottom</div>
+                <div>
+                  <label for="email">Email:</label>
+                  <input type="text" name="email" id="email" required />
+                </div>
+
+                <div>
+                  <label for="password">Password:</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="confirm_password">Confirm Password:</label>
+                  <input
+                    type="password"
+                    name="confirm_password"
+                    id="confirm_password"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="dob">Date of Birth:</label>
+                  <input type="date" name="dob" id="dob" required />
+                </div>
+
+                <div class="color-picker">
+                  <label for="bg-color">Color:</label>
+                  <input type="color" id="bg-color" />
+                </div>
+
+                <div class="gender">
+                  <label>Gender:</label>
+                  <input type="radio" id="male" name="gender" value="male" required />
+                  <label for="male">Male</label>
+              
+                  <input type="radio" id="female" name="gender" value="female" required />
+                  <label for="female">Female</label>
+              </div>
+              
+
+                <div class="checkbox-container">
+                  <input type="checkbox" id="scales" name="scales" checked />
+                  <label for="scales">Read all terms and conditions</label>
+
+                  <input type="checkbox" id="horns" name="horns" />
+                  <label for="horns">Allow cookies</label>
+                </div>
+
+                <div>
+                  <button>Submit</button>
+                </div>
+              </form>
             </div>
-        
-            <!-- Right Box -->
-            <div style="width: 50px; height: 110px; border: 5px solid green;">Right</div>
+
+            <div class="box-container-left-bottom">Left Bottom</div>
+          </div>
+
+          <!-- Right Box -->
+          <div class="box-container-right">Right</div>
         </div>
-        
-        
+      </section>
+    </main>
 
-
-    </section>
+    <footer></footer>
   </body>
 </html>
