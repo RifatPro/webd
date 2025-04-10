@@ -192,6 +192,12 @@
                   <input type="date" name="dob" id="dob" required />
                 </div>
 
+                <div>
+                  <label for="counntry">Country:</label>
+                  <input type="text" name="country" id="country" required />
+                </div>
+
+
                 <div class="color-picker">
                   <label for="bg-color">Color:</label>
                   <input type="color" id="bg-color" />
@@ -231,5 +237,99 @@
     </main>
 
     <footer></footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector(".form-example"); // Select the form
+    
+        form.addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent default form submission
+    
+          // Collecting values from the form inputs
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const confirmPassword = document.getElementById("confirm_password").value;
+          const dob = document.getElementById("dob").value;
+          const country = document.getElementById("country").value.trim();
+          const color = document.getElementById("bg-color").value;
+          const genderInput = document.querySelector('input[name="gender"]:checked');
+          const scales = document.getElementById("scales").checked;
+          const horns = document.getElementById("horns").checked;
+    
+          const errors = []; // Array to collect error messages
+    
+          // Password validation
+          if (password.length < 8) {
+            errors.push("Password must be at least 8 characters long.");
+          }
+          if (/\s/.test(password)) {
+            errors.push("Password must not contain spaces.");
+          }
+          if (password !== confirmPassword) {
+            errors.push("Passwords do not match.");
+          }
+    
+          // Date of Birth validation (ensuring the user is 18+)
+          if (dob) {
+            const dobDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - dobDate.getFullYear();
+            const m = today.getMonth() - dobDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dobDate.getDate())) {
+              age--;
+            }
+            if (age < 18) {
+              errors.push("You must be at least 18 years old.");
+            }
+          } else {
+            errors.push("Please select your date of birth.");
+          }
+    
+          // Country validation (country should not be empty)
+          if (country === "") {
+            errors.push("Please enter/select a country.");
+          }
+    
+          // Gender validation (ensuring the user selects a gender)
+          if (!genderInput) {
+            errors.push("Please select a gender.");
+          }
+    
+          // If there are any errors, show them
+          if (errors.length > 0) {
+            alert("Error:\n" + errors.join("\n"));
+            return; // Stop execution if there are errors
+          }
+    
+          // If validation passes, create a data object to submit
+          const formData = {
+            name,
+            email,
+            password,
+            confirmPassword,
+            dob,
+            country,
+            color,
+            gender: genderInput.value,
+            agreedToTerms: scales,
+            allowCookies: horns,
+          };
+    
+          // Log form data to the console (you can send this to a server)
+          console.log("Form Submitted Successfully:", formData);
+    
+          // Alert the user that the form has been successfully submitted
+          alert("Form Submitted Successfully! ✅ Check console for data.");
+    
+          // Reset the form after successful submission
+          form.reset();
+        });
+      });
+    </script>
+    
+    
+    
+    
   </body>
 </html>
